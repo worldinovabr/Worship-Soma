@@ -1,0 +1,28 @@
+{
+  "background_color": "#ffffff",
+  "theme_color": "#ffffff",
+  "display": "standalone",
+  "lang": "en",
+  "name": "WorshipApp",
+  "short_name": "WorshipApp",
+  "start_url": "https://worldinovabr.github.io/Worship-Soma/",
+  "orientation": "portrait",
+  "description": "Aplicativo de escalas e avisos para o WorshipApp",
+  "id": "/Worship-Soma/",
+  "icons": [
+    {
+      "src": "/Worship-Soma/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "related_applications": [
+    {
+      "platform": "play",
+      "url": "http://play.google.com/store/apps/details?id=com.worldinovabr.worshipapp",
+      "id": "com.worldinovabr.worshipapp"
+    }
+  ],
+  "prefer_related_applications": true
+}
