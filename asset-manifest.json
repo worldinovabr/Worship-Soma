@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.js": "/Worship-Soma/static/js/main.9aca2318.js",
+    "main.js": "/Worship-Soma/static/js/main.8a28958b.js",
     "static/js/651.f63555e3.js": "/Worship-Soma/static/js/651.f63555e3.js",
     "static/media/logo.png": "/Worship-Soma/static/media/logo.83883d843d8242e4ab5a.png",
     "static/media/MaterialCommunityIcons.ttf": "/Worship-Soma/static/media/MaterialCommunityIcons.5d42b4e60858731e7b65.ttf",
@@ -14,11 +14,11 @@
     "favicon-16.png": "/Worship-Soma/favicon-16.png",
     "manifest.json": "/Worship-Soma/manifest.json",
     "serve.json": "/Worship-Soma/serve.json",
-    "main.9aca2318.js.map": "/Worship-Soma/static/js/main.9aca2318.js.map",
+    "main.8a28958b.js.map": "/Worship-Soma/static/js/main.8a28958b.js.map",
     "651.f63555e3.js.map": "/Worship-Soma/static/js/651.f63555e3.js.map"
   },
   "entrypoints": [
     "static/js/651.f63555e3.js",
-    "static/js/main.9aca2318.js"
+    "static/js/main.8a28958b.js"
   ]
 }
