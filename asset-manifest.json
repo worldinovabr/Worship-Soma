@@ -1,11 +1,12 @@
 {
   "files": {
-    "main.js": "/Worship-Soma/static/js/main.1e8c171a.js",
-    "static/js/207.299d286c.js": "/Worship-Soma/static/js/207.299d286c.js",
+    "main.js": "/Worship-Soma/static/js/main.be6d52d7.js",
+    "static/js/241.4960afce.js": "/Worship-Soma/static/js/241.4960afce.js",
     "static/media/MaterialCommunityIcons.ttf": "/Worship-Soma/static/media/MaterialCommunityIcons.5d42b4e60858731e7b65.ttf",
     "static/media/logo.png": "/Worship-Soma/static/media/logo.8fe991a363cd30569c94.png",
     "static/media/Ionicons.ttf": "/Worship-Soma/static/media/Ionicons.3517aeaa34b2f8cd8eef.ttf",
     "static/media/MaterialIcons.ttf": "/Worship-Soma/static/media/MaterialIcons.120b4c7bbd155bd0a04d.ttf",
+    "static/media/FontAwesome.ttf": "/Worship-Soma/static/media/FontAwesome.1e59d2330b4c6deb84b3.ttf",
     "static/media/Feather.ttf": "/Worship-Soma/static/media/Feather.0f5d9cede2e831f3fc80.ttf",
     "favicon.ico": "/Worship-Soma/favicon.ico",
     "favicon-32.png": "/Worship-Soma/favicon-32.png",
@@ -13,11 +14,11 @@
     "favicon-16.png": "/Worship-Soma/favicon-16.png",
     "manifest.json": "/Worship-Soma/manifest.json",
     "serve.json": "/Worship-Soma/serve.json",
-    "main.1e8c171a.js.map": "/Worship-Soma/static/js/main.1e8c171a.js.map",
-    "207.299d286c.js.map": "/Worship-Soma/static/js/207.299d286c.js.map"
+    "main.be6d52d7.js.map": "/Worship-Soma/static/js/main.be6d52d7.js.map",
+    "241.4960afce.js.map": "/Worship-Soma/static/js/241.4960afce.js.map"
   },
   "entrypoints": [
-    "static/js/207.299d286c.js",
-    "static/js/main.1e8c171a.js"
+    "static/js/241.4960afce.js",
+    "static/js/main.be6d52d7.js"
   ]
 }
