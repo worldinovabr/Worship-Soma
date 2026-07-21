@@ -1,0 +1,26 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Loading…</title>
+    <meta name="robots" content="noindex">
+    <script>
+      (function(){
+        var base = '/Worship-Soma';
+        var indexPath = base + '/index.html';
+        fetch(indexPath, {cache: 'no-store'}).then(function(res){
+          if (!res.ok) throw new Error('index fetch failed');
+          return res.text();
+        }).then(function(html){
+          document.open();
+          document.write(html);
+          document.close();
+          history.replaceState({}, '', location.pathname + location.search + location.hash);
+        }).catch(function(){
+          location.replace(base + '/');
+        });
+      })();
+    </script>
+  </head>
+  <body></body>
+</html>
