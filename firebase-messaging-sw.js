@@ -14,6 +14,36 @@ firebase.initializeApp({
 
 const messaging = firebase.messaging();
 
+function getBadgeCount() {
+  return caches.open('worship-badge').then((cache) => (
+    cache.match('/badge-count').then((response) => (
+      response ? response.text().then((text) => Number(text) || 0) : 0
+    ))
+  ));
+}
+
+function saveBadgeCount(count) {
+  return caches.open('worship-badge').then((cache) => (
+    cache.put('/badge-count', new Response(String(Math.max(0, count))))
+  ));
+}
+
+function updateAppBadge(count) {
+  return saveBadgeCount(count).then(() => {
+    if (!('setAppBadge' in navigator) || !('clearAppBadge' in navigator)) return;
+
+    if (count > 0) {
+      return navigator.setAppBadge(count);
+    }
+
+    return navigator.clearAppBadge();
+  }).catch(() => undefined);
+}
+
+function incrementAppBadge() {
+  return getBadgeCount().then((count) => updateAppBadge(count + 1));
+}
+
 function getScopedAssetUrl(assetPath) {
   const normalizedAssetPath = assetPath.startsWith('/') ? assetPath.slice(1) : assetPath;
   return new URL(normalizedAssetPath, self.registration.scope).href;
@@ -30,7 +60,10 @@ messaging.onBackgroundMessage((payload) => {
     data: payload.data || {},
   };
 
-  self.registration.showNotification(title, options);
+  return Promise.all([
+    incrementAppBadge(),
+    self.registration.showNotification(title, options),
+  ]);
 });
 
 self.addEventListener('push', (event) => {
@@ -61,7 +94,16 @@ self.addEventListener('push', (event) => {
     },
   };
 
-  event.waitUntil(self.registration.showNotification(title, options));
+  event.waitUntil(Promise.all([
+    incrementAppBadge(),
+    self.registration.showNotification(title, options),
+  ]));
+});
+
+self.addEventListener('message', (event) => {
+  if (event.data?.type === 'SET_BADGE_COUNT') {
+    event.waitUntil(updateAppBadge(Number(event.data.count) || 0));
+  }
 });
 
 self.addEventListener('notificationclick', (event) => {
