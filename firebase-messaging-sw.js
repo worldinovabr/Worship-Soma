@@ -25,10 +25,43 @@ messaging.onBackgroundMessage((payload) => {
     body: payload.notification?.body,
     icon: getScopedAssetUrl('/icon-512.png'),
     badge: getScopedAssetUrl('/favicon-32.png'),
+    tag: payload.data?.tag || 'worship-notification',
+    renotify: true,
     data: payload.data || {},
   };
 
   self.registration.showNotification(title, options);
+});
+
+self.addEventListener('push', (event) => {
+  if (!event.data) return;
+
+  let payload = {};
+  try {
+    payload = event.data.json();
+  } catch (error) {
+    payload = {
+      title: 'WorshipApp',
+      body: event.data.text(),
+    };
+  }
+
+  if (!payload.title && !payload.body) return;
+
+  const title = payload.title || 'WorshipApp';
+  const options = {
+    body: payload.body,
+    icon: payload.icon || getScopedAssetUrl('/icon-512.png'),
+    badge: payload.badge || getScopedAssetUrl('/favicon-32.png'),
+    tag: payload.tag || 'worship-notification',
+    renotify: true,
+    data: {
+      url: payload.url || self.registration.scope,
+      ...(payload.data || {}),
+    },
+  };
+
+  event.waitUntil(self.registration.showNotification(title, options));
 });
 
 self.addEventListener('notificationclick', (event) => {
