@@ -49,15 +49,29 @@ function getScopedAssetUrl(assetPath) {
   return new URL(normalizedAssetPath, self.registration.scope).href;
 }
 
+function getNotificationUrl(data = {}) {
+  const rawUrl = data.url || data.click_action || data.link || self.registration.scope;
+
+  try {
+    return new URL(rawUrl, self.registration.scope).href;
+  } catch (error) {
+    return self.registration.scope;
+  }
+}
+
 messaging.onBackgroundMessage((payload) => {
   const title = payload.notification?.title || 'WorshipApp';
+  const url = getNotificationUrl(payload.data || {});
   const options = {
     body: payload.notification?.body,
     icon: getScopedAssetUrl('/icon-512.png'),
     badge: getScopedAssetUrl('/favicon-32.png'),
     tag: payload.data?.tag || 'worship-notification',
     renotify: true,
-    data: payload.data || {},
+    data: {
+      ...(payload.data || {}),
+      url,
+    },
   };
 
   return Promise.all([
@@ -82,6 +96,7 @@ self.addEventListener('push', (event) => {
   if (!payload.title && !payload.body) return;
 
   const title = payload.title || 'WorshipApp';
+  const url = getNotificationUrl(payload);
   const options = {
     body: payload.body,
     icon: payload.icon || getScopedAssetUrl('/icon-512.png'),
@@ -89,8 +104,8 @@ self.addEventListener('push', (event) => {
     tag: payload.tag || 'worship-notification',
     renotify: true,
     data: {
-      url: payload.url || self.registration.scope,
       ...(payload.data || {}),
+      url,
     },
   };
 
@@ -108,13 +123,19 @@ self.addEventListener('message', (event) => {
 
 self.addEventListener('notificationclick', (event) => {
   event.notification.close();
-  const url = event.notification.data?.url || self.registration.scope;
+  const url = getNotificationUrl(event.notification.data || {});
 
   event.waitUntil(
     clients.matchAll({ type: 'window', includeUncontrolled: true }).then((clientList) => {
       for (const client of clientList) {
         if ('focus' in client) {
-          client.navigate(url);
+          client.postMessage({
+            type: 'WORSHIP_NOTIFICATION_CLICK',
+            url,
+          });
+          if ('navigate' in client) {
+            client.navigate(url);
+          }
           return client.focus();
         }
       }
