@@ -1,8 +1,8 @@
 {
   "background_color": "#ffffff",
-  "theme_color": "#111827",
+  "theme_color": "#ffffff",
   "display": "standalone",
-  "lang": "pt-BR",
+  "lang": "en",
   "name": "WorshipApp",
   "short_name": "WorshipApp",
   "start_url": "https://worldinovabr.github.io/Worship-Soma/",
@@ -17,5 +17,12 @@
       "purpose": "any maskable"
     }
   ],
-  "prefer_related_applications": false
+  "related_applications": [
+    {
+      "platform": "play",
+      "url": "http://play.google.com/store/apps/details?id=com.worldinovabr.worshipapp",
+      "id": "com.worldinovabr.worshipapp"
+    }
+  ],
+  "prefer_related_applications": true
 }
